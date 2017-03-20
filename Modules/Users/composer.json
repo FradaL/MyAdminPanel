@@ -1,0 +1,18 @@
+{
+    "name": "nwidart/users",
+    "description": "",
+    "require": {
+    "spatie/laravel-permission": "^1.11"
+    },
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Modules\\Users\\": "Users/"
+        }
+    }
+}
