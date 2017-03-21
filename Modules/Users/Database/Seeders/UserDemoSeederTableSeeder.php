@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Modules\Users\Entities\User;
 use Spatie\Permission\Models\Role;
+
 
 
 class UserDemoSeederTableSeeder extends Seeder
@@ -26,10 +28,9 @@ class UserDemoSeederTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        DB::table('user_has_roles')->insert([
-            'role_id' => 1,
-            'user_id' => 1,
-        ]);
+
+        $user = User::find(1);
+        $user->assignRole('Admin');
 
         DB::table('permissions')->insert([
             'name' => 'view-users',
@@ -46,8 +47,12 @@ class UserDemoSeederTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        $role = Role::find(1);
-        $role->givePermissionTo(['view-users', 'view-roles', 'view-permissions']);
+        $role = Role::findByName('Admin');
+
+        $permissions = ['view-users', 'view-roles', 'view-permissions'];
+
+        $role->givePermissionTo($permissions);
+
         // $this->call("OthersTableSeeder");
     }
 }
