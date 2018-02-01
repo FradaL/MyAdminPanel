@@ -26,7 +26,7 @@ class EditPermission extends FormRequest
     {
         return [
             //
-            'name' => 'required|unique:Permissions,name,' . $this->route->parameters('id')
+            'name' => 'required|unique:permissions,name,' . $this->route->parameter('id')
         ];
     }
 
